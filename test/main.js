@@ -14,3 +14,16 @@ describe('GET /', () => {
       });
   });
 });
+
+describe('GET /doesnotexist', () => {
+  it('should respond with 404', (done) => {
+    request(server)
+      .get('/doesnotexist')
+      .expect(404)
+      .end((err) => {
+        if (err) return done(err);
+
+        return done();
+      });
+  });
+});
