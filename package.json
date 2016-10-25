@@ -1,0 +1,11 @@
+{
+  "name": "esf-pdf-service",
+  "version": "1.0.0",
+  "description": "service for generating PDF files from JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timur",
+  "license": "ISC"
+}
