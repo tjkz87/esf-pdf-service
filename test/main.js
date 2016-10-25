@@ -1,14 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const request = require('supertest');
 const server = require('../index');
 
-describe('GET /', function() {
-  it('should respond with 200', function(done) {
+describe('GET /', () => {
+  it('should respond with 200', (done) => {
     request(server)
       .get('/')
       .expect(200)
-      .end((err, res) => {
+      .end((err) => {
         if (err) return done(err);
-        done();
+
+        return done();
       });
   });
 });
