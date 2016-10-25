@@ -27,3 +27,16 @@ describe('GET /doesnotexist', () => {
       });
   });
 });
+
+describe('POST /pdfs', () => {
+  it('should respond with 201', (done) => {
+    request(server)
+      .post('/pdfs')
+      .expect(201)
+      .end((err) => {
+        if (err) return done(err);
+
+        return done();
+      });
+  });
+});

@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
+app.post('/pdfs', (req, res) => {
+  res.status(201).send('Created');
+});
+
 app.listen(port, () => {
   console.log('listening on port', port);
 });
