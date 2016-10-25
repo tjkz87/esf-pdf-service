@@ -22,6 +22,15 @@ describe('POST /pdfs', () => {
   it('should respond with 201', (done) => {
     request(server)
       .post('/pdfs')
+      .send({ invoices: [] })
+      .set('Accept', 'application/json')
       .expect(201, done);
+  });
+  it('should respond with 400 for bad request', (done) => {
+    request(server)
+      .post('/pdfs')
+      .send('notvalidjson')
+      .set('Accept', 'application/json')
+      .expect(400, done);
   });
 });
