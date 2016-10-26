@@ -22,7 +22,7 @@ describe('POST /pdfs', () => {
   it('should respond with 201', (done) => {
     request(server)
       .post('/pdfs')
-      .send({ invoices: [] })
+      .send({ invoices: ['hello!'] })
       .set('Accept', 'application/json')
       .expect(201, done);
   });

@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 const config = require('./env/config');
 
 const app = express();
@@ -16,6 +17,12 @@ app.post('/pdfs', (req, res) => {
 
     return res.status(400).send('Not valid JSON');
   }
+
+  ejs.renderFile(`${__dirname}/template.ejs`, req.body, (err, str) => {
+    if (err) return res.status(500).send('server error');
+
+    return console.log('ejs', str);
+  });
 
   return res.status(201).send('Created');
 });
