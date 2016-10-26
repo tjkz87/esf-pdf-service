@@ -393,6 +393,30 @@
         </table>
       </div>
     </div>
+    <!-- Section D -->
+    <div class="sectionContainer">
+      <h3>Раздел D. Реквизиты грузоотправителя и грузополучателя</h3>
+      <div>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td>
+                <b>22.</b><span class="field-name">Грузоотправитель</span><br>
+                <b>22.1</b><span class="field-name">ИИН/БИН</span><span class="field-value"><%=invoice.consignor.tin || ''%></span><br>
+                <b>22.2</b><span class="field-name">Наименование</span><span class="field-value"><%=invoice.consignor.name || ''%></span><br>
+                <b>22.3</b><span class="field-name">Адрес отправки</span><span class="field-value"><%=invoice.consignor.address || ''%></span><br>
+              </td>
+              <td style="width:50%;">
+                <b>23.</b><span class="field-name">Грузополучатель</span><br>
+                <b>23.1</b><span class="field-name">ИИН/БИН</span><span class="field-value"><%=invoice.consignee.tin || ''%></span><br>
+                <b>23.2</b><span class="field-name">Наименование</span><span class="field-value"><%=invoice.consignee.name || ''%></span><br>
+                <b>23.3</b><span class="field-name">Адрес доставки</span><span class="field-value"><%=invoice.consignee.address || ''%></span><br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!-- Section J -->
     <div class="sectionContainer">
       <h3>Раздел J. Сведения по ЭЦП</h3>

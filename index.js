@@ -10,9 +10,11 @@ let dummyInvoice = null;
 
 app.use(bodyParser.json());
 
-fs.readFile('./dummy_data/invoice_fixed.json', 'utf8', (err, data) => {
+fs.readFile('./dummy_data/invoice_add.json', 'utf8', (err, data) => {
   if (err) throw err;
   dummyInvoice = JSON.parse(data);
+  dummyInvoice.invoice.consignor = dummyInvoice.invoice.consignor || {};
+  dummyInvoice.invoice.consignee = dummyInvoice.invoice.consignee || {};
 });
 
 app.get('/', (req, res) => {
@@ -31,7 +33,7 @@ app.post('/pdfs', (req, res) => {
 
 app.get('/pdfs', (req, res) => {
   ejs.renderFile(`${__dirname}/template.ejs`, dummyInvoice, (err, str) => {
-    if (err) return res.status(500).send('server error');
+    if (err) throw err;
 
     return res.send(str);
   });
