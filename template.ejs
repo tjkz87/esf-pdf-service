@@ -452,6 +452,121 @@
         </table>
       </div>
     </div>
+    <!-- Section G -->
+    <div class="sectionContainer">
+      <h3 class="section_product">Раздел G. Данные&nbsp;по&nbsp;товарам, работам,&nbsp;услугам</h3>
+      <div>
+        <table class="kursTable" border="0">
+            <tbody><tr>
+                <td style="width:100px;">
+                    <b>33.</b>
+                </td>
+                <td style="width:50%;">
+                    <b>33.1</b><span class="field-name">Код валюты</span>
+                    <span class="field-value">
+                        KZT
+                    </span>
+                </td>
+                <td>
+                    <b>33.2</b><span class="field-name">Курс валюты</span><span class="field-value"></span>
+                </td>
+            </tr>
+        </tbody></table>
+        <table class="ServiceTable" border="0">
+            <thead>
+                <tr>
+                    <th rowspan="2">№ п/п</th>
+                    <th rowspan="2">Наименование товаров, работ, услуг</th>
+                    <th rowspan="2">Код товара (ТН ВЭД)</th>
+                    <th rowspan="2">Ед. изм.</th>
+                    <th rowspan="2">Кол-во (объем)</th>
+                    <th rowspan="2">Цена (тариф) за единицу товара, работы, услуги без косвенных налогов</th>
+                    <th rowspan="2">Стоимость товаров, работ, услуг без косвенных налогов</th>
+                    <th colspan="2">Акциз</th>
+                    <th rowspan="2">Размер оборота по реализации (облагаемый/необлагаемый оборот)</th>
+                    <th colspan="2">НДС</th>
+                    <th rowspan="2">Стоимость товаров, работ, услуг с учетом косвенных налогов</th>
+                    <th rowspan="2">№ заявления в рамках ТС или Декларации на товары</th>
+                    <th rowspan="2">Дополнительные данные</th>
+                </tr>
+                <tr>
+                    <th>Ставка</th>
+                    <th>Сумма</th>
+                    <th>Ставка</th>
+                    <th>Сумма</th>
+                </tr>
+            </thead>
+            <tbody><tr>
+                <td class="num-cell">1</td>
+                <td class="num-cell">2</td>
+                <td class="num-cell">3</td>
+                <td class="num-cell">4</td>
+                <td class="num-cell">5</td>
+                <td class="num-cell">6</td>
+                <td class="num-cell">7</td>
+                <td class="num-cell">8</td>
+                <td class="num-cell">9</td>
+                <td class="num-cell">10</td>
+                <td class="num-cell">11</td>
+                <td class="num-cell">12</td>
+                <td class="num-cell">13</td>
+                <td class="num-cell">14</td>
+                <td class="num-cell">15</td>
+            </tr>
+            <% invoice.productSet.product.forEach(function(item, index) { %>
+              <tr class="service_grid">
+                <td class="first" value="<%=index + 1%>"><%=index + 1%></td>
+                <td class="long" style="width: 200px;"><span><%=item.description || ''%></span></td>
+                <td class="long"><span><%=item.unitCode || ''%></span></td>
+                <td><span><%=item.unitNomenclature || ''%></span></td>
+                <td><span><%=item.quantity || ''%></span></td>
+                <td><span><%=item.unitPrice || ''%></span></td>
+                <td>
+                  <span class="calculable" data-field="priceWithoutTax"><%=item.priceWithoutTax || ''%></span>
+                </td>
+                <td>
+                  <span><%=item.exciseRate || ''%></span>
+                </td>
+                <td>
+                  <span class="calculable" data-field="exciseAmount"><%=item.exciseAmount || ''%></span>
+                </td>
+                <td>
+                  <span class="calculable" data-field="turnoverSize"><%=item.turnoverSize || ''%></span>
+                </td>
+                <td>
+                  <span><%=item.ndsRate || ''%>%</span>
+                </td>
+                <td>
+                  <span class="calculable" data-field="ndsAmount"><%=item.ndsAmount || ''%></span>
+                </td>
+                <td>
+                  <span class="calculable" data-field="priceWithTax"><%=item.priceWithTax || ''%></span>
+                </td>
+                <td class="long"><span><%=item.applicationNumberInCustomsUnion || ''%></span></td>
+                <td class="long"><span><%=item.additional || ''%></span></td>
+              </tr>
+            <% }); %>
+            <tr class="totalRow">
+              <td></td>
+              <td></td>
+              <td colspan="4" style="text-align: right;">Всего по счету:</td>
+              <!--<td></td>-->
+              <!--<td></td>-->
+              <!--<td></td>-->
+              <td class="priceWithoutTax"><%=invoice.productSet.totalPriceWithoutTax || ''%></td>
+              <td></td>
+              <td class="exciseAmount"><%=invoice.productSet.totalExciseAmount || ''%></td>
+              <td class="turnoverSize"><%=invoice.productSet.totalTurnoverSize || ''%></td>
+              <td></td>
+              <td class="ndsAmount"><%=invoice.productSet.totalNdsAmount || ''%></td>
+              <td class="priceWithTax"><%=invoice.productSet.totalPriceWithTax || ''%></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!-- Section J -->
     <div class="sectionContainer">
       <h3>Раздел J. Сведения по ЭЦП</h3>
