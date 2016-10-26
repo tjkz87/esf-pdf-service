@@ -18,13 +18,16 @@ app.post('/pdfs', (req, res) => {
     return res.status(400).send('Not valid JSON');
   }
 
+
+  return res.status(201).send('Created');
+});
+
+app.get('/pdfs', (req, res) => {
   ejs.renderFile(`${__dirname}/template.ejs`, req.body, (err, str) => {
     if (err) return res.status(500).send('server error');
 
-    return console.log('ejs', str);
+    return res.send(str);
   });
-
-  return res.status(201).send('Created');
 });
 
 app.listen(port, () => {
