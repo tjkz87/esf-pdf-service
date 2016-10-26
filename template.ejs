@@ -417,6 +417,41 @@
         </table>
       </div>
     </div>
+    <!-- Section E -->
+    <div class="sectionContainer">
+      <h3 class="section_customers">Раздел E. Условия поставки</h3>
+      <div>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td style="width:50%;">
+                <b>24</b><span class="field-name">Договор (контракт) на поставку товаров, работ, услуг</span><br>
+                <b>24.1</b><span class="field-name">Номер</span><span class="field-value"><%=invoice.deliveryTerm.contractNum || ''%></span><br>
+                <b>24.2</b><span class="field-name">Дата</span><span class="field-value"><%=invoice.deliveryTerm.contractDate || ''%></span>
+              </td>
+              <td>
+                <b>27</b><span class="field-name">Поставка товаров осуществлена по доверенности</span><br>
+                <b>27.1</b><span class="field-name">Номер</span><span class="field-value"><%=invoice.deliveryTerm.warrant || ''%></span><br>
+                <b>27.2</b><span class="field-name">Дата</span><span class="field-value"><%=invoice.deliveryTerm.warrantDate || ''%></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>25.</b><span class="field-name">Условия оплаты по договору</span><span class="field-value"><%=invoice.deliveryTerm.term || ''%></span>
+              </td>
+              <td rowspan="2">
+                <b>28.</b><span class="field-name">Пункт назначения</span><span class="field-value"><%=invoice.deliveryTerm.destination || ''%></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>26.</b><span class="field-name">Способ отправления</span><span class="field-value"><%=invoice.deliveryTerm.exerciseWay || ''%></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <!-- Section J -->
     <div class="sectionContainer">
       <h3>Раздел J. Сведения по ЭЦП</h3>

@@ -15,6 +15,7 @@ fs.readFile('./dummy_data/invoice_add.json', 'utf8', (err, data) => {
   dummyInvoice = JSON.parse(data);
   dummyInvoice.invoice.consignor = dummyInvoice.invoice.consignor || {};
   dummyInvoice.invoice.consignee = dummyInvoice.invoice.consignee || {};
+  dummyInvoice.invoice.deliveryTerm = dummyInvoice.invoice.deliveryTerm || {};
 });
 
 app.get('/', (req, res) => {
