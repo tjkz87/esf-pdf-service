@@ -176,20 +176,20 @@
             <td>
               <b>1.</b>
               <span class="field-name bold">Регистрационный номер</span>
-              <span class="field-value">' + invoiceInfo.registrationNumber + '</span>
+              <span class="field-value"><%=registrationNumber%></span>
             </td>
             <td>
-              <b>1.1.</b><span class="field-name bold">Номер учетной системы</span><span class="field-value">'+ invoiceInfo.invoice.num +'</span>
+              <b>1.1.</b><span class="field-name bold">Номер учетной системы</span><span class="field-value"><%=invoice.num%></span>
             </td>
           </tr>
           <tr>
             <td style="width:50%;">
               <b>2.</b><span class="field-name bold">Дата выписки</span>
-              <span class="field-value">'+ invoiceInfo.invoice.date +'</span>
+              <span class="field-value"><%=invoice.date%></span>
             </td>
             <td>
               <b>3.</b><span class="field-name bold">Дата совершения оборота</span>
-              <span class="field-value">'+ invoiceInfo.invoice.turnoverDate +'</span>
+              <span class="field-value"><%=invoice.turnoverDate%></span>
             </td>
           </tr>
           <tr>
@@ -200,22 +200,21 @@
                 <tr>
                   <td class="first_td">
                     <b>4.</b><span class="field-name">Исправленный</span>
-                    <span class="field-value">'+ fixed_invoice_checkmark +'</span>
-                    </span>
+                    <span class="field-value"><%-invoice.invoiceType === "FIXED_INVOICE"? '&#x2713;' : ''%></span>
                   </td>
                   <td>
                     <b>4.1</b><span class="field-name">Дата</span>
-                    <span class="field-value">'+ fixed_invoice_date +'</span>
+                    <span class="field-value"><%=invoice.invoiceType === "FIXED_INVOICE" ? invoice.relatedInvoice.date : ''%></span>
                   </td>
                 </tr>
                 <tr>
                   <td class="first_td">
                     <b>4.2</b><span class="field-name">Номер</span>
-                    <span class="field-value">'+ fixed_invoice_num +'</span>
+                    <span class="field-value"><%=invoice.invoiceType === "FIXED_INVOICE" ? invoice.relatedInvoice.num : ''%></span>
                   </td>
                   <td>
                     <b>4.3</b><span class="field-name">Регистрационный номер</span>
-                    <span class="field-value">'+ fixed_invoice_reg_num +'</span>
+                    <span class="field-value"><%=invoice.invoiceType === "FIXED_INVOICE" ? invoice.relatedInvoice.registrationNumber : ''%></span>
                   </td>
                 </tr>
                 </tbody>
@@ -228,19 +227,22 @@
                 <tr>
                   <td class="first_td">
                     <b>5.</b><span class="field-name">Дополнительный</span>
-                    <span class="field-value">'+ additional_invoice_checkmark +'</span>
+                    <span class="field-value"><%-invoice.invoiceType === "ADDITIONAL_INVOICE" ? '&#x2713;' : ''%></span>
                     </span>
                   </td>
                   <td>
-                    <b>5.1</b><span class="field-name">Дата</span><span class="field-value">'+ additional_invoice_date +'</span>
+                    <b>5.1</b><span class="field-name">Дата</span>
+                    <span class="field-value"><%=invoice.invoiceType === "ADDITIONAL_INVOICE" ? invoice.relatedInvoice.date : ''%></span>
                   </td>
                 </tr>
                 <tr>
                   <td class="first_td">
-                    <b>5.2</b><span class="field-name">Номер</span><span class="field-value">'+  additional_invoice_num+'</span>
+                    <b>5.2</b><span class="field-name">Номер</span>
+                    <span class="field-value"><%=invoice.invoiceType === "ADDITIONAL_INVOICE" ? invoice.relatedInvoice.num : ''%></span>
                   </td>
                   <td>
-                    <b>5.3</b><span class="field-name">Регистрационный номер</span><span class="field-value">'+ additional_invoice_reg_num +'</span>
+                    <b>5.3</b><span class="field-name">Регистрационный номер</span>
+                    <span class="field-value"><%=invoice.invoiceType === "ADDITIONAL_INVOICE" ? invoice.relatedInvoice.registrationNumber : ''%></span>
                   </td>
                 </tr>
                 </tbody>
@@ -263,7 +265,7 @@
                 <tbody>
                 <tr>
                   <td class="first_td">
-                    <b>6.</b><span class="field-name">ИИН/БИН</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].tin || '') +'</span>
+                    <b>6.</b><span class="field-name">ИИН/БИН</span><span class="field-value"><%=invoice.sellers.seller[0].tin || ''%></span>
                   </td>
                   <td>
                     <b>6.1</b><span class="field-name">РНН реорганизованного лица</span><span class="field-value"></span>
@@ -287,29 +289,29 @@
           </tr>
           <tr>
             <td>
-              <b>7.</b><span class="field-name">Поставщик</span><span class="field-value">'+ invoiceInfo.invoice.sellers.seller[0].name +'</span>
+              <b>7.</b><span class="field-name">Поставщик</span><span class="field-value"><%=invoice.sellers.seller[0].name%></span>
             </td>
           </tr>
           <tr>
             <td>
-                <b>8.</b><span class="field-name">Адрес места нахождения</span><span class="field-value">'+ invoiceInfo.invoice.sellers.seller[0].address +'</span>
+                <b>8.</b><span class="field-name">Адрес места нахождения</span><span class="field-value"><%=invoice.sellers.seller[0].address%></span>
             </td>
           </tr>
           <tr>
             <td>
               <b>9.</b><span class="field-name">Свидетельство плательщика НДС:</span><br>
-              <b>9.1.</b><span class="field-name">серия</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].certificateSeries || '') +'</span><br>
-              <b>9.2.</b><span class="field-name">Номер</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].certificateNum || '') +'</span>
+              <b>9.1.</b><span class="field-name">серия</span><span class="field-value"><%=invoice.sellers.seller[0].certificateSeries || ''%></span><br>
+              <b>9.2.</b><span class="field-name">Номер</span><span class="field-value"><%=invoice.sellers.seller[0].certificateNum || ''%></span>
             </td>
           </tr>
           <tr>
             <td>
               <b>11.</b><span class="field-name">Документы, подтверждающие поставку товаров, работ, услуг:</span><br>
-              <b>11.1.</b><span class="field-name">Номер</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].deliveryDocNum || '') +'</span><br>
-              <b>11.2.</b><span class="field-name">Дата</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].deliveryDocDate || '') +'</span>
+              <b>11.1.</b><span class="field-name">Номер</span><span class="field-value"><%=invoice.sellers.seller[0].deliveryDocNum || ''%></span><br>
+              <b>11.2.</b><span class="field-name">Дата</span><span class="field-value"><%=invoice.sellers.seller[0].deliveryDocDate || ''%></span>
             </td>
             <td>
-              <b>12.</b><span class="field-name">Дополнительные сведения</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].trailer || '') +'</span>
+              <b>12.</b><span class="field-name">Дополнительные сведения</span><span class="field-value"><%=invoice.sellers.seller[0].trailer || ''%></span>
             </td>
           </tr>
           </tbody>
@@ -318,25 +320,110 @@
           <tbody>
           <tr>
             <td style="width:50%">
-              <b>13.</b><span class="field-name">КБе</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].kbe || '') +'</span>
+              <b>13.</b><span class="field-name">КБе</span><span class="field-value"><%=invoice.sellers.seller[0].kbe || ''%></span>
             </td>
             <td>
-              <b>14.</b><span class="field-name">ИИК</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].iik || '') +'</span>
+              <b>14.</b><span class="field-name">ИИК</span><span class="field-value"><%=invoice.sellers.seller[0].iik || ''%></span>
             </td>
           </tr>
           <tr>
             <td>
-              <b>15.</b><span class="field-name">БИК</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].bik || '') +'</span>
+              <b>15.</b><span class="field-name">БИК</span><span class="field-value"><%=invoice.sellers.seller[0].bik || ''%></span>
             </td>
             <td>
-              <b>16.</b><span class="field-name">Наименование банка</span><span class="field-value">'+ (invoiceInfo.invoice.sellers.seller[0].bank || '') +'</span>
+              <b>16.</b><span class="field-name">Наименование банка</span><span class="field-value"><%=invoice.sellers.seller[0].bank || ''%></span>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
-
+    <!-- Section C -->
+    <div class="sectionContainer">
+      <h3>Раздел C. Реквизиты получателя</h3>
+      <div>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td style="width:55%">
+                  <table class="no_border_table">
+                  <tbody>
+                    <tr>
+                      <td class="first_td display_none">
+                        <b>17.</b><span class="field-name">Страна</span><span class="field-value"></span>
+                      </td>
+                      <td class="first_td ">
+                        <b>17.</b><span class="field-name">ИИН/БИН</span><span class="field-value"><%=invoice.customers.customer[0].tin || ''%></span>
+                      </td>
+                      <td>
+                        <b>17.1</b><span class="field-name">РНН реорганизованного лица</span><span class="field-value"></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                  </table>
+              </td>
+              <td rowspan="4">
+                <b>21.</b><span class="field-name">Категория получателя</span>
+                <ul class="select">
+                  <li class="clearfix"><div class="status_letter">A</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Комитент</label></li>
+                  <li class="clearfix"><div class="status_letter">B</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Комиссионер</label></li>
+                  <li class="clearfix"><div class="status_letter">C</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Лизингополучатель</label></li>
+                  <li class="clearfix"><div class="status_letter">D</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Участник договора о совместной деятельности</label></li>
+                  <li class="clearfix"><div class="status_letter">E</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Государственное учреждение</label></li>
+                  <li class="clearfix"><div class="status_letter">F</div><input class="status_input" onclick="return false" onkeydown="return false" type="checkbox"><label class="status_label">Нерезидент/розница</label></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>18.</b><span class="field-name">Получатель</span><span class="field-value"><%=invoice.customers.customer[0].name || ''%></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>19.</b><span class="field-name">Адрес места нахождения</span><span class="field-value"><%=invoice.customers.customer[0].address || ''%></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>20.</b><span class="field-name">Дополнительные сведения</span><span class="field-value"><%=invoice.customers.customer[0].trailer || ''%></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Section J -->
+    <div class="sectionContainer">
+      <h3>Раздел J. Сведения по ЭЦП</h3>
+      <div>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td>
+                <table class="j-table" border="0">
+                  <tbody>
+                    <tr>
+                      <td style="width:50%;"><b>36.</b><span class="field-name bold">ЭЦП юридического лица (структурного подразделения юридического лица) или индивидуального предпринимателя</span></td>
+                      <td style="width:30%;"><p></p></td>
+                      <td style="width:20%; text-align: center" rowspan="2">М.П.</td>
+                    </tr>
+                    <tr>
+                      <td><b>37.</b><span class="field-name bold">ЭЦП лица, уполномоченного подписывать счета-фактуры</span></td>
+                      <td><p><%=invoice.signature || ''%></p></td>
+                    </tr>
+                    <tr>
+                      <td><b>38.</b><span class="field-name bold">Ф.И.О. лица, уполномоченного подписывать счета-фактуры</span></td>
+                      <td><p><%=invoice.operatorFullname || ''%></p></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 </html>
