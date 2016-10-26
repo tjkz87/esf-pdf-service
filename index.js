@@ -7,7 +7,6 @@ const phantom = require('phantom');
 
 const app = express();
 const port = config.server.port;
-let dummyInvoice = null;
 let template = null;
 let phInstance = null;
 let sitepage = null;
@@ -37,19 +36,7 @@ app.post('/pdfs', (req, res) => {
   return null;
 });
 
-app.get('/pdfs', (req, res) => {
-  res.send(ejs.render(template, dummyInvoice));
-});
-
-fs.readFile('./dummy_data/invoice.json', 'utf8', (err, data) => {
-  if (err) throw err;
-  dummyInvoice = JSON.parse(data);
-  dummyInvoice.invoice.consignor = dummyInvoice.invoice.consignor || {};
-  dummyInvoice.invoice.consignee = dummyInvoice.invoice.consignee || {};
-  dummyInvoice.invoice.deliveryTerm = dummyInvoice.invoice.deliveryTerm || {};
-  console.log('Dummy invoice loaded');
-});
-
+// start phantom sevice and load template for faster response
 phantom.create()
   .then((instance) => {
     phInstance = instance;
@@ -60,10 +47,6 @@ phantom.create()
   .then((page) => {
     sitepage = page;
     console.log('Phantom page created');
-
-    // return Promise.resolve();
-  })
-  .then(() => {
     fs.readFile(`${__dirname}/templates/esf.ejs`, 'utf8', (err, data) => {
       if (err) throw err;
       template = data;
